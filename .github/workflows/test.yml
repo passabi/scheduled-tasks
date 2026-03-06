@@ -22,28 +22,55 @@ jobs:
           pip install -r requirements.txt
 
       - name: Check secrets are configured
-        # env:
-          # MY_EMAIL: ${{ secrets.MY_EMAIL }}
-          # MY_PASSWORD: ${{ secrets.MY_PASSWORD }}
-#        run: |
-#          if [ -z "$MY_EMAIL" ]; then
-#            echo "MY_EMAIL secret is not set!"
-#            echo "Go to Settings > Secrets > Actions and add it."
-#            exit 1
-#          else
-#            echo "MY_EMAIL is configured"
-#          fi
+        env:
+          OWN_API_KEY: ${{ secrets.OWN_API_KEY }}
+          ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          MY_TWILIO_VIRTUAL_NUMBER: ${{ secrets.MY_TWILIO_VIRTUAL_NUMBER }}
+          MY_TWILIO_VERIFIED_REAL_NUMBER: ${{ secrets.MY_TWILIO_VERIFIED_REAL_NUMBER }}
+        run: |
+          if [ -z "$OWN_API_KEY" ]; then
+            echo "OWN_API_KEY secret is not set!"
+            echo "Go to Settings > Secrets > Actions and add it."
+            exit 1
+          else
+            echo "OWN_API_KEY is configured"
+          fi
 
-#          if [ -z "$MY_PASSWORD" ]; then
-#            echo "MY_PASSWORD secret is not set!"
-#            echo "Go to Settings > Secrets > Actions and add it."
-#            exit 1
-#          else
-#            echo "MY_PASSWORD is configured"
-#          fi
+          if [ -z "$ACCOUNT_SID" ]; then
+            echo "ACCOUNT_SID secret is not set!"
+            echo "Go to Settings > Secrets > Actions and add it."
+            exit 1
+          else
+            echo "ACCOUNT_SID is configured"
+          fi
 
-#          echo ""
-#          echo "All secrets are configured!"
+          if [ -z "$AUTH_TOKEN" ]; then
+            echo "AUTH_TOKEN secret is not set!"
+            echo "Go to Settings > Secrets > Actions and add it."
+            exit 1
+          else
+            echo "AUTH_TOKEN is configured"
+          fi
+
+          if [ -z "$MY_TWILIO_VIRTUAL_NUMBER" ]; then
+            echo "MY_TWILIO_VIRTUAL_NUMBER secret is not set!"
+            echo "Go to Settings > Secrets > Actions and add it."
+            exit 1
+          else
+            echo "MY_TWILIO_VIRTUAL_NUMBER is configured"
+          fi
+
+          if [ -z "$MY_TWILIO_VERIFIED_REAL_NUMBER" ]; then
+            echo "MY_TWILIO_VERIFIED_REAL_NUMBER secret is not set!"
+            echo "Go to Settings > Secrets > Actions and add it."
+            exit 1
+          else
+            echo "MY_TWILIO_VERIFIED_REAL_NUMBER is configured"
+          fi
+
+          echo ""
+          echo "All secrets are configured!"
 
       - name: Check required files exist
         run: |
