@@ -30,7 +30,7 @@ will_rain = False
 for hour_data in weather_data["list"]:
     condition_code = hour_data['weather'][0]['id']
 
-    if int(condition_code) < 700:
+    if int(condition_code) < 1700:
         will_rain = True
 
 if will_rain:
