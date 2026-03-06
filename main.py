@@ -5,8 +5,8 @@ from twilio.http.http_client import TwilioHttpClient
 
 
 
-LAT = 51.5074
-LON = -0.1278
+LAT = 41.902782
+LON = 12.496365
 
 OWN_Endopoint = "https://api.openweathermap.org/data/2.5/forecast"
 api_key = os.environ.get("OWN_API_KEY")
@@ -30,7 +30,7 @@ will_rain = False
 for hour_data in weather_data["list"]:
     condition_code = hour_data['weather'][0]['id']
 
-    if int(condition_code) < 1700:
+    if int(condition_code) < 700:
         will_rain = True
 
 if will_rain:
@@ -50,23 +50,5 @@ if will_rain:
     print(message.status)
 
     print("Bring an Umbrella")
-else:
-    proxy_client = TwilioHttpClient()
-    #proxy_client.session.proxies = {'https': os.environ['https_proxy']}
-    https_proxy = os.environ.get("https_proxy") or os.environ.get("HTTPS_PROXY")
-    if https_proxy:
-        proxy_client.session.proxies = {"https": https_proxy}
-
-    
-    client = Client(account_sid, auth_token, http_client=proxy_client)
-    message = client.messages.create(
-        body="Nun chiove waglio ciao tu",
-        from_=os.environ.get("MY_TWILIO_VIRTUAL_NUMBER"),
-        to=os.environ.get("MY_TWILIO_VERIFIED_REAL_NUMBER"),
-    )
-
-    print(message.status)
-
-    print("ciao te")
 
 
