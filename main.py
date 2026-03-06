@@ -47,5 +47,19 @@ if will_rain:
     print(message.status)
 
     print("Bring an Umbrella")
+else:
+    proxy_client = TwilioHttpClient()
+    proxy_client.session.proxies = {'https': os.environ['https_proxy']}
+
+    client = Client(account_sid, auth_token, http_client=proxy_client)
+    message = client.messages.create(
+        body="Nun chiove waglio ciao tu",
+        from_=os.environ.get("MY_TWILIO_VIRTUAL_NUMBER"),
+        to=os.environ.get("MY_TWILIO_VERIFIED_REAL_NUMBER"),
+    )
+
+    print(message.status)
+
+    print("ciao te")
 
 
